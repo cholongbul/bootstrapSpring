@@ -6,6 +6,11 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>Test</title>
+    <!-- jquery -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css"/>
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css"/>
@@ -30,14 +35,14 @@
         function myTimer() {
             document.getElementById("lineChart").style.visibility = "visible";
         }
-        var t1 = setInterval(dounutCartInterval, 2000);
-        function dounutCartInterval(){
-            if (document.getElementById("doughnutChart").style.visibility=="visible"){
-                document.getElementById("doughnutChart").style.visibility = "hidden";
-            } else {
-                document.getElementById("doughnutChart").style.visibility = "visible"
-            }
-        }
+        // var t1 = setInterval(dounutCartInterval, 2000);
+        // function dounutCartInterval(){
+        //     if (document.getElementById("doughnutChart").style.visibility=="visible"){
+        //         document.getElementById("doughnutChart").style.visibility = "hidden";
+        //     } else {
+        //         document.getElementById("doughnutChart").style.visibility = "visible"
+        //     }
+        // }
     </script>
     <!-- 연습코드 -->
 </head>
@@ -65,7 +70,7 @@
                     document.write(Math.random() + "<br/>")
                     document.write(Math.max(1, 2, 3, 4) + "<br/>")
                 </script>
-                <canvas id="lineChart" style="height:250px"></canvas>
+                <canvas id="linechart-multi" style="height:250px"></canvas>
             </div>
         </div>
     </div>
@@ -78,10 +83,64 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Line chart</h4>
+                <div id="content">
+                    <div id="tableBody"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 연습코드 -->
 <!-- container-scroller -->
+
 <!-- plugins:js -->
 <script src="vendors/js/vendor.bundle.base.js"></script>
+
+<!-- ajax data -->
+<script>
+    selectList();
+    //list 처음에 불러오기
+    function selectList() {
+        var url = "getAirportdata.do";
+        var str = "";
+        $
+            .getJSON(
+                url,
+                function(data) {
+                    console.log(data.response["body"].items.item);
+                    $('#tableBody').empty();
+                    $
+                        .each(
+                            data.response["body"].items.item,
+                            function(i, v) {
+                                console.log(v)
+                                str = '<div class="body_item" id="body_item1" name="body_item'+v.icaoCode+'">'
+                                    + '<span class="tableBody_item checkBoxArea">'
+                                    + '<input class="checkBox" type="checkbox">'
+                                    + '</span>'
+                                    + '<span class="tableBody_item">'
+                                    + v.airportName
+                                    + '</span>'
+                                    + '<span class="tableBody_item">'
+                                    + v.tmFc
+                                    + '</span>'
+                                    + '<span class="tableBody_item">'
+                                    + v.wd
+                                    + '</span>'
+                                    + '<span class="tableBody_item">'
+                                    + v.ws
+                                    + '</span>'
+                                    + '</div>';
+                                $('#tableBody').append(str);
+                            });
+                });
+    };
+</script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <script src="vendors/chart.js/Chart.min.js"></script>
