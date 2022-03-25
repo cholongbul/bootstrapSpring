@@ -27,7 +27,8 @@ public class ChartController {
     @GetMapping("getElectiondata.do")
     @ResponseBody
     public String getElectiondata(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        String numOfrows = request.getParameter("numOfrows");
 
-        return ApiExplorer.getElectionAPI();
+        return ApiExplorer.getElectionAPI(numOfrows);
     }
 }
