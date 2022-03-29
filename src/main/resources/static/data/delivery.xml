@@ -13,61 +13,33 @@
                 <dataname>PreMTD</dataname>
                 <items>
                     <item>
-                        <label>
-                            Compact
-                        </label>
-                        <data>
-                            186
-                        </data>
+                        <label>Compact</label>
+                        <data>186</data>
                     </item>
 
                     <item>
-                        <label>
-                            E
-                        </label>
-                        <data>
-                            425
-                        </data>
+                        <label>E</label>
+                        <data>425</data>
                     </item>
                     <item>
-                        <label>
-                            S
-                        </label>
-                        <data>
-                            292
-                        </data>
+                        <label>S</label>
+                        <data>292</data>
                     </item>
                     <item>
-                        <label>
-                            Dream
-                        </label>
-                        <data>
-                            2
-                        </data>
+                        <label>Dream</label>
+                        <data>2</data>
                     </item>
                     <item>
-                        <label>
-                            SUV
-                        </label>
-                        <data>
-                            87
-                        </data>
+                        <label>SUV</label>
+                        <data>87</data>
                     </item>
                     <item>
-                        <label>
-                            EQ
-                        </label>
-                        <data>
-                            11
-                        </data>
+                        <label>EQ</label>
+                        <data>11</data>
                     </item>
                     <item>
-                        <label>
-                            AMG
-                        </label>
-                        <data>
-                            19
-                        </data>
+                        <label>AMG</label>
+                        <data>19</data>
                     </item>
                 </items>
             </dataset>

@@ -1,71 +1,127 @@
 $(function () {
+
+    var reqcnt = 0
     /* ChartJS
      * -------
      * Data and config for chartjs
      */
+    runChart()
 
-    //라인차트 ajax
-    $.ajax({
-        type: "GET",
-        url: "getData.do?page=1",
-        dataType: "xml",
-        success: function (xml) {
-            var datanamelist = [];
-            var labellist = [];
-            var datalist = [];
-            // Parse the xml file and get data
-            $(xml).find("chart").each(function () {
-                $("#chartname").html($(this).find("chartname").text());
-                $(this).find("dataset").each(function (i) {
-                    datanamelist.push($(this).find("dataname").text());
-                    $(this).find("item").each(function (i) {
-                        datalist.push($(this).find("data").text());
-                        labellist.push($(this).find("label").text());
+    function runChart() {
+        $.ajax({
+            type: "GET",
+            url: "getData.do?page=" + reqcnt,
+            dataType: "xml",
+            //ajax요청
+            success: function (xml, textStatus, response) {
+                //xml변수선언
+                var xmlcnt = response.getResponseHeader("xmlcnt");
+                var datanamelist = [];
+                var label2d = [];
+                var data2d = [];
+                var chartname;
+                if (reqcnt + 1 == xmlcnt) {
+                    reqcnt = 0;
+                } else {
+                    reqcnt++
+                }
+                // xml파싱
+                $(xml).find("chart").each(function () {
+                    chartname = $(this).find("chartname").text();
+
+                    $(this).find("dataset").each(function (i) {
+                        var labellist = [];
+                        var datalist = [];
+                        datanamelist.push($(this).find("dataname").text());
+                        $(this).find("item").each(function (i) {
+                            datalist.push($(this).find("data").text());
+                            labellist.push($(this).find("label").text());
+                        });
+                        label2d.push(labellist);
+                        data2d.push(datalist);
                     });
                 });
-            });
 
-            console.log(datanamelist);
-            console.log(labellist);
-            console.log(datalist);
+                console.log(datanamelist);
+                console.log(label2d[0]);
+                console.log(data2d[0]);
+                console.log(datanamelist.length)
+                $("#barOrMix-title").text(chartname)
+                if (datanamelist.length == 1) {
 
-            var data = {
-                labels: labellist,
-                datasets: [{
-                    label: '# of Votes',
-                    data: datalist,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1,
-                    fill: false
-                }]
-            };
+                    var data = {
+                        labels: label2d[0],
+                        datasets: [{
+                            label: datanamelist[0],
+                            data: data2d[0],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    };
+                    $("#barOrMixChart").replaceWith('<canvas id="barOrMixChart" style="height:250px"></canvas>');
+                    var barChartCanvas = $("#barOrMixChart").get(0).getContext("2d");
+                    // This will get the first returned node in the jQuery collection.
+                    var barChart = new Chart(barChartCanvas, {
+                        type: 'bar',
+                        data: data,
+                        options: options
+                    });
+                } else {
 
-            if ($("#barChart").length) {
-                var barChartCanvas = $("#barChart").get(0).getContext("2d");
-                // This will get the first returned node in the jQuery collection.
-                var barChart = new Chart(barChartCanvas, {
-                    type: 'bar',
-                    data: data,
-                    options: options
-                });
+                    var multiLineData = {
+                        labels: label2d[0],
+                        datasets: [{
+                            label: datanamelist[0],
+                            data: data2d[0],
+                            borderColor: [
+                                '#587ce4'
+                            ],
+                            borderWidth: 2,
+                            fill: false
+                        },
+                            {
+                                label: datanamelist[1],
+                                data: data2d[1],
+                                borderColor: [
+                                    '#ede190'
+                                ],
+                                borderWidth: 2,
+                                fill: false
+                            }
+                        ]
+                    };
+                    $("#barOrMixChart").replaceWith('<canvas id="barOrMixChart" style="height:250px"></canvas>');
+                    var multiLineCanvas = $("#barOrMixChart").get(0).getContext("2d");
+                    var lineChart = new Chart(multiLineCanvas, {
+                        type: 'line',
+                        data: multiLineData,
+                        options: options
+                    });
+
+                }
             }
-        }
-    });
+        });
+    }
+
+    //라인차트 ajax
+
+    setInterval(runChart, 10000);
 
     'use strict';
     var data = {
@@ -141,7 +197,7 @@ $(function () {
             }]
         },
         legend: {
-            display: false
+            display: true
         },
         elements: {
             point: {
@@ -393,8 +449,6 @@ $(function () {
 
 
 // Get context with jQuery - using jQuery's .get() method.
-
-
 
 
     if ($("#linechart-multi").length) {
