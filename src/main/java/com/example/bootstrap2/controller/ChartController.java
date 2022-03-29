@@ -23,6 +23,7 @@ public class ChartController {
     public String getElectiondata(HttpServletResponse response, HttpServletRequest request) throws Exception {
         String page = request.getParameter("page");
         ApiExplorer apiExplorer = new ApiExplorer();
+        apiExplorer.setXMLPATH();
         response.addIntHeader("xmlcnt", apiExplorer.getFilecnt());
 
         return apiExplorer.getDataAPI(Integer.parseInt(page));
