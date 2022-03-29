@@ -3,6 +3,70 @@ $(function () {
      * -------
      * Data and config for chartjs
      */
+
+    //라인차트 ajax
+    $.ajax({
+        type: "GET",
+        url: "getData.do?page=1",
+        dataType: "xml",
+        success: function (xml) {
+            var datanamelist = [];
+            var labellist = [];
+            var datalist = [];
+            // Parse the xml file and get data
+            $(xml).find("chart").each(function () {
+                $("#chartname").html($(this).find("chartname").text());
+                $(this).find("dataset").each(function (i) {
+                    datanamelist.push($(this).find("dataname").text());
+                    $(this).find("item").each(function (i) {
+                        datalist.push($(this).find("data").text());
+                        labellist.push($(this).find("label").text());
+                    });
+                });
+            });
+
+            console.log(datanamelist);
+            console.log(labellist);
+            console.log(datalist);
+
+            var data = {
+                labels: labellist,
+                datasets: [{
+                    label: '# of Votes',
+                    data: datalist,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                }]
+            };
+
+            if ($("#barChart").length) {
+                var barChartCanvas = $("#barChart").get(0).getContext("2d");
+                // This will get the first returned node in the jQuery collection.
+                var barChart = new Chart(barChartCanvas, {
+                    type: 'bar',
+                    data: data,
+                    options: options
+                });
+            }
+        }
+    });
+
     'use strict';
     var data = {
         labels: ["2012", "2013", "2014", "2015", "2016", "2017"],
@@ -295,58 +359,43 @@ $(function () {
     }
     var pageNo = 0;
     var numOfrows = 6;
-    setInterval(function () {
+// setInterval(function () {
+//
+//     console.log(pageNo);
+//     $.getJSON('getElectiondata.do?' + '&numOfrows=' + numOfrows, function (data) {
+//
+//         var sd_name = [];
+//         var pplt_cnt = [];
+//
+//         $.each(data.getCtpvElcntInfoInqire["item"], function (i, item) {
+//             if (item["SD_NAME"] != "합계") {
+//                 sd_name.push(item["SD_NAME"]);
+//                 pplt_cnt.push(item["PPLT_CNT"]);
+//             }
+//         });
+//         console.log(sd_name);
+//         console.log(pplt_cnt);
+//         doughnutPieData.datasets[0].data = pplt_cnt;
+//         doughnutPieData.labels = sd_name;
+//
+//         if ($("#doughnutChart").length) {
+//             $("#doughnutChart").replaceWith('<canvas id="doughnutChart" style="height:250px"></canvas>');
+//             var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+//             var doughnutChart = new Chart(doughnutChartCanvas, {
+//                 type: 'doughnut',
+//                 data: doughnutPieData,
+//                 options: doughnutPieOptions
+//             });
+//         }
+//
+//     });
+// }, 5000);
 
-        console.log(pageNo);
-        $.getJSON('getElectiondata.do?' + '&numOfrows=' + numOfrows, function (data) {
 
-            var sd_name = [];
-            var pplt_cnt = [];
-
-            $.each(data.getCtpvElcntInfoInqire["item"], function (i, item) {
-                if (item["SD_NAME"] != "합계") {
-                    sd_name.push(item["SD_NAME"]);
-                    pplt_cnt.push(item["PPLT_CNT"]);
-                }
-            });
-            console.log(sd_name);
-            console.log(pplt_cnt);
-            doughnutPieData.datasets[0].data = pplt_cnt;
-            doughnutPieData.labels = sd_name;
-
-            if ($("#doughnutChart").length) {
-                $("#doughnutChart").replaceWith('<canvas id="doughnutChart" style="height:250px"></canvas>');
-                var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
-                var doughnutChart = new Chart(doughnutChartCanvas, {
-                    type: 'doughnut',
-                    data: doughnutPieData,
-                    options: doughnutPieOptions
-                });
-            }
-
-        });
-    }, 5000);
+// Get context with jQuery - using jQuery's .get() method.
 
 
-    // Get context with jQuery - using jQuery's .get() method.
-    if ($("#barChart").length) {
-        var barChartCanvas = $("#barChart").get(0).getContext("2d");
-        // This will get the first returned node in the jQuery collection.
-        var barChart = new Chart(barChartCanvas, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
-    }
 
-    if ($("#lineChart").length) {
-        var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
-        var lineChart = new Chart(lineChartCanvas, {
-            type: 'line',
-            data: data,
-            options: options
-        });
-    }
 
     if ($("#linechart-multi").length) {
         var multiLineCanvas = $("#linechart-multi").get(0).getContext("2d");
@@ -411,4 +460,5 @@ $(function () {
         });
     }
 
-});
+})
+;

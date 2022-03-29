@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response>
+    <header>
+        <result_code>200</result_code>
+        <result_msg><![CDATA[정상 응답입니다.]]></result_msg>
+    </header>
+    <body>
+        <chart>
+            <chartname>Revenue</chartname>
+            <dataset>
+                <dataname>MTD</dataname>
+                <items>
+                    <item>
+                        <label>OCT-21</label>
+                        <data>12467</data>
+                    </item>
+                    <item>
+                        <label>NOV-21</label>
+                        <data>13255</data>
+                    </item>
+                    <item>
+                        <label>DEC-21</label>
+                        <data>13735</data>
+                    </item>
+                    <item>
+                        <label>JAN-22</label>
+                        <data>12412</data>
+                    </item>
+                    <item>
+                        <label>FEB-22</label>
+                        <data>11137</data>
+                    </item>
+                    <item>
+                        <label>MAR-22</label>
+                        <data>8660</data>
+                    </item>
+                </items>
+            </dataset>
+        </chart>
+
+    </body>
+</response>

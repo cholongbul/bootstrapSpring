@@ -23,28 +23,6 @@
     <link rel="stylesheet" href="css/style.css"/>
     <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png"/>
-    <!-- 연습코드 -->
-    <script>
-        var d1 = new Date();
-
-        function chartOn() {
-            document.getElementById("lineChart").style.visibility = "hidden";
-            setTimeout(myTimer, 10000)
-        }
-
-        function myTimer() {
-            document.getElementById("lineChart").style.visibility = "visible";
-        }
-        // var t1 = setInterval(dounutCartInterval, 2000);
-        // function dounutCartInterval(){
-        //     if (document.getElementById("doughnutChart").style.visibility=="visible"){
-        //         document.getElementById("doughnutChart").style.visibility = "hidden";
-        //     } else {
-        //         document.getElementById("doughnutChart").style.visibility = "visible"
-        //     }
-        // }
-    </script>
-    <!-- 연습코드 -->
 </head>
 <body>
 <!-- 연습코드 -->
@@ -62,14 +40,6 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Line chart</h4>
-                <script>
-                    document.write(d1 + "<br/>")
-                    document.write(d1.getFullYear() + "<br/>")
-                    document.write(d1.getHours() + "<br/>")
-                    document.write(Math.PI + "<br/>")
-                    document.write(Math.random() + "<br/>")
-                    document.write(Math.max(1, 2, 3, 4) + "<br/>")
-                </script>
                 <canvas id="barChart" style="height:250px"></canvas>
             </div>
         </div>
@@ -87,10 +57,10 @@
     <div class="col-lg-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Line chart</h4>
-                <div id="content">
-                    <div id="tableBody"></div>
-                </div>
+                <h2 id="chartname"></h2>
+                <p>데이터셋: <span id="datasets"></span></p>
+                <h3>값목록</h3>
+                <ul id="datas"></ul>
             </div>
         </div>
     </div>
@@ -103,43 +73,6 @@
 
 <!-- ajax data -->
 <script>
-    selectList();
-    //list 처음에 불러오기
-    function selectList() {
-        var url = "getAirportdata.do";
-        var str = "";
-        $
-            .getJSON(
-                url,
-                function(data) {
-                    console.log(data.response["body"].items.item);
-                    $('#tableBody').empty();
-                    $
-                        .each(
-                            data.response["body"].items.item,
-                            function(i, v) {
-                                console.log(v)
-                                str = '<div class="body_item" id="body_item1" name="body_item'+v.icaoCode+'">'
-                                    + '<span class="tableBody_item checkBoxArea">'
-                                    + '<input class="checkBox" type="checkbox">'
-                                    + '</span>'
-                                    + '<span class="tableBody_item">'
-                                    + v.airportName
-                                    + '</span>'
-                                    + '<span class="tableBody_item">'
-                                    + v.tmFc
-                                    + '</span>'
-                                    + '<span class="tableBody_item">'
-                                    + v.wd
-                                    + '</span>'
-                                    + '<span class="tableBody_item">'
-                                    + v.ws
-                                    + '</span>'
-                                    + '</div>';
-                                $('#tableBody').append(str);
-                            });
-                });
-    };
 </script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
