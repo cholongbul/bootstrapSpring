@@ -12,49 +12,27 @@
                 <items>
                     <item>
                         <label>SEP-21</label>
-                        <data>
-                            2.9
-                        </data>
+                        <data>2.9</data>
                     </item>
                     <item>
-                        <label>
-                            OCT-21
-                        </label>
-                        <data>
-                            2.9
-                        </data>
+                        <label>OCT-21</label>
+                        <data>2.9</data>
                     </item>
                     <item>
-                        <label>
-                            NOV-21
-                        </label>
-                        <data>
-                            2.9
-                        </data>
+                        <label>NOV-21</label>
+                        <data>2.9</data>
                     </item>
                     <item>
-                        <label>
-                            DEC-21
-                        </label>
-                        <data>
-                            3.1
-                        </data>
+                        <label>DEC-21</label>
+                        <data>3.1</data>
                     </item>
                     <item>
-                        <label>
-                            JAN-22
-                        </label>
-                        <data>
-                            3.1
-                        </data>
+                        <label>JAN-22</label>
+                        <data>3.1</data>
                     </item>
                     <item>
-                        <label>
-                            FEB-22
-                        </label>
-                        <data>
-                            3.1
-                        </data>
+                        <label>FEB-22</label>
+                        <data>3.1</data>
                     </item>
 
                 </items>
@@ -64,52 +42,28 @@
                 <dataname>value</dataname>
                 <items>
                     <item>
-                        <label>
-                            SEP-21
-                        </label>
-                        <data>
-                            32807
-                        </data>
+                        <label>SEP-21</label>
+                        <data>32807</data>
                     </item>
                     <item>
-                        <label>
-                            OCT-21
-                        </label>
-                        <data>
-                            28738
-                        </data>
+                        <label>OCT-21</label>
+                        <data>28738</data>
                     </item>
                     <item>
-                        <label>
-                            NOV-21
-                        </label>
-                        <data>
-                            28407
-                        </data>
+                        <label>NOV-21</label>
+                        <data>28407</data>
                     </item>
                     <item>
-                        <label>
-                            DEC-21
-                        </label>
-                        <data>
-                            26078
-                        </data>
+                        <label>DEC-21</label>
+                        <data>26078</data>
                     </item>
                     <item>
-                        <label>
-                            JAN-22
-                        </label>
-                        <data>
-                            24474
-                        </data>
+                        <label>JAN-22</label>
+                        <data>24474</data>
                     </item>
                     <item>
-                        <label>
-                            FEB-22
-                        </label>
-                        <data>
-                            25069
-                        </data>
+                        <label>FEB-22</label>
+                        <data>25069</data>
                     </item>
 
                 </items>

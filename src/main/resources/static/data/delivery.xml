@@ -75,61 +75,33 @@
                 <dataname>MTD</dataname>
                 <items>
                     <item>
-                        <label>
-                            Compact
-                        </label>
-                        <data>
-                            133
-                        </data>
+                        <label>Compact</label>
+                        <data>133</data>
                     </item>
 
                     <item>
-                        <label>
-                            E
-                        </label>
-                        <data>
-                            292
-                        </data>
+                        <label>E</label>
+                        <data>292</data>
                     </item>
                     <item>
-                        <label>
-                            S
-                        </label>
-                        <data>
-                            157
-                        </data>
+                        <label>S</label>
+                        <data>157</data>
                     </item>
                     <item>
-                        <label>
-                            Dream
-                        </label>
-                        <data>
-                            150
-                        </data>
+                        <label>Dream</label>
+                        <data>150</data>
                     </item>
                     <item>
-                        <label>
-                            SUV
-                        </label>
-                        <data>
-                            355
-                        </data>
+                        <label>SUV</label>
+                        <data>355</data>
                     </item>
                     <item>
-                        <label>
-                            EQ
-                        </label>
-                        <data>
-                            62
-                        </data>
+                        <label>EQ</label>
+                        <data>62</data>
                     </item>
                     <item>
-                        <label>
-                            AMG
-                        </label>
-                        <data>
-                            107
-                        </data>
+                        <label>AMG</label>
+                        <data>107</data>
                     </item>
                 </items>
             </dataset>
