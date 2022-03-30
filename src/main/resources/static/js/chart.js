@@ -1,6 +1,7 @@
 $(function () {
 
     var reqcnt = 0
+    var reqcnt2 = 1
     /* ChartJS
      * -------
      * Data and config for chartjs
@@ -20,11 +21,6 @@ $(function () {
                 var label2d = [];
                 var data2d = [];
                 var chartname;
-                if (reqcnt + 1 == xmlcnt) {
-                    reqcnt = 0;
-                } else {
-                    reqcnt++
-                }
                 // xml파싱
                 $(xml).find("chart").each(function () {
                     chartname = $(this).find("chartname").text();
@@ -54,22 +50,21 @@ $(function () {
                         datasets: [{
                             label: datanamelist[0],
                             data: data2d[0],
-                            backgroundColor: [
+                            backgroundColor:
                                 'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
+                            // 'rgba(54, 162, 235, 0.2)',
+                            // 'rgba(255, 206, 86, 0.2)',
+                            // 'rgba(75, 192, 192, 0.2)',
+                            // 'rgba(153, 102, 255, 0.2)',
+                            // 'rgba(255, 159, 64, 0.2)'
+
+                            borderColor: 'rgba(255,99,132,1)',
+                            // 'rgba(54, 162, 235, 1)',
+                            // 'rgba(255, 206, 86, 1)',
+                            // 'rgba(75, 192, 192, 1)',
+                            // 'rgba(153, 102, 255, 1)',
+                            // 'rgba(255, 159, 64, 1)'
+
                             borderWidth: 1,
                             fill: false
                         }]
@@ -82,7 +77,7 @@ $(function () {
                         data: data,
                         options: options
                     });
-                } else {
+                } else if (reqcnt == 0) {
 
                     var multiLineData = {
                         labels: label2d[0],
@@ -114,6 +109,106 @@ $(function () {
                         options: options
                     });
 
+                } else {
+                    var multiLineBarData = {
+                        labels: label2d[0],
+                        datasets: [{
+                            type: 'bar',
+                            label: datanamelist[1],
+                            data: data2d[1],
+                            borderColor: 'rgba(255,99,132,1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderWidth: 1,
+                            fill: false
+                        },
+                            {
+                                type: 'line',
+                                label: datanamelist[0],
+                                data: data2d[0],
+                                xAxisID: 'turn-x',
+                                yAxisID: 'turn-y',
+                                borderColor: [
+                                    '#ede190'
+                                ],
+                                backgroundColor: '#ede190',
+                                borderWidth: 2,
+                                fill: false,
+                                pointStyle: 'circle',
+                                pointRadius: 10,
+                                pointHoverRadius: 15
+                            }
+                        ]
+                    }
+                    var multilineBarOptions = {
+                        scales: {
+                            yAxes: [{
+                                display: true,
+                                stacked: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'value-y'
+                                },
+                                ticks: {
+                                    beginAtZero: true
+                                },
+                                gridLines: {
+                                    color: "rgba(204, 204, 204,0.1)"
+                                }
+                            }, {
+                                id: 'turn-y',
+                                display: false,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: "proportion"
+                                },
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }],
+                            xAxes: [{
+                                display: true,
+                                stacked: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'value-x'
+                                },
+                                gridLines: {
+                                    color: "rgba(204, 204, 204,0.1)"
+                                }
+                            }, {
+                                id: 'turn-x',
+                                offset: true,
+                                display: false,
+                                stacked: false,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: 'turn-x'
+                                }
+
+                            }]
+                        },
+                        legend: {
+                            display: true
+                        },
+                        elements: {
+                            point: {
+                                radius: 0
+                            }
+                        }
+                    };
+                    $("#barOrMixChart").replaceWith('<canvas id="barOrMixChart" style="height:250px"></canvas>');
+                    var multiLineCanvas = $("#barOrMixChart").get(0).getContext("2d");
+                    var lineChart = new Chart(multiLineCanvas, {
+                        type: 'bar',
+                        data: multiLineBarData,
+                        options: multilineBarOptions
+                    });
+                }
+
+                if (reqcnt + 1 == xmlcnt) {
+                    reqcnt = 0;
+                } else {
+                    reqcnt++
                 }
             }
         });
